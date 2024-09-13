@@ -1,10 +1,10 @@
 //JAVASCRIPT
 
-//quando a pagina carregar
+//Creando página
 window.onload=function(){
 	listar();
-	document.getElementById('frmCadastro').addEventListener('submit', adicionarOuAlterar);
-	document.getElementById('frmCadastro').addEventListener('submit', listar);
+	document.getElementById('frmRegistro').addEventListener('submit', adicionarOuAlterar);
+	document.getElementById('frmRegistro').addEventListener('submit', listar);
 }
 
 //variavel global
@@ -12,10 +12,10 @@ var idAlterar = null;
 
 //Evento do botao cadastrar/salvar (verificação)
 function adicionarOuAlterar(e){
-	var nom = document.getElementById('txtNome').value;
+	var nom = document.getElementById('txtNombre').value;
 	var p = {
-		nome : !nom ? "sem nome": nom, //mesmo que if(nom = ""){ nom = "sem nome";}
-		nasc : new Date(document.getElementById('dtpDataNascimento').value.replace("-","/")),
+		nombre : !nom ? "sem nombre": nom, //mesmo que if(nom = ""){ nom = "sem nome";}
+		nascimiento : new Date(document.getElementById('dtpFechaNacimiento').value.replace("-","/")),
 		sexo : document.getElementById('rdoMasculino').checked ? 'M' : 'F',
 		data : new Date()
 	}
@@ -25,7 +25,7 @@ function adicionarOuAlterar(e){
 	else if(idAlterar > 0)
 		alterar(p);
 	else
-		alert("Ação desconhecida");	
+		alert("Accion Desconocida");	
 	
 	//bloqueia a ação de atualização do browser
 	e.preventDefault();
@@ -51,10 +51,10 @@ function adicionar(p){
 	
 	var pessoa = {
 		Id: idValido,
-		Nome: p.nome,
-		DataNascimento: p.nasc.toLocaleString("pt-BR").substring(0, 10),
+		Nombre: p.nombre,
+		FechaNacimiento: p.nascimiento.toLocaleString("pt-BR").substring(0, 10),
 		Sexo: p.sexo,
-		DataCadastro : p.data.toLocaleString("pt-BR")
+		DatoRegistro : p.dato.toLocaleString("pt-BR")
 	};
 	
 	//Adiciona o objeto ao ultimo indice do array
@@ -66,26 +66,26 @@ function adicionar(p){
 	//armazena no Localstorage
 	localStorage.setItem('value', JSON.stringify(pessoas));	
 	//reseta os campos do formulario
-	document.getElementById('frmCadastro').reset();	
+	document.getElementById('frmRegistro').reset();	
 }
 
 function alterar(p){
-	var btn = document.getElementById('btnCadastrarSalvar');	
+	var btn = document.getElementById('btnGuardarRegistro');	
 
 	pessoas = JSON.parse(localStorage.getItem('value'));
 	//substituir as informaçoes
 	for(var i = 0; i < pessoas.length; i++){
 		if(pessoas[i].Id == idAlterar){
-			pessoas[i].Nome = p.nome;
-			pessoas[i].DataNascimento = p.nasc.toLocaleString("pt-BR").substring(0, 10);
+			pessoas[i].Nombre = p.nombre;
+			pessoas[i].FechaNacimiento = p.nascimiento.toLocaleString("pt-BR").substring(0, 10);
 			pessoas[i].Sexo = p.sexo;
-			pessoas[i].DataCadastro = p.data.toLocaleString("pt-BR");
+			pessoas[i].DatoRegistro = p.dato.toLocaleString("pt-BR");
 			
-			btn.value = "Cadastrar";
+			btn.value = "Registrar";
 			idAlterar = null;
 
 			localStorage.setItem('value', JSON.stringify(pessoas));	
-			document.getElementById('frmCadastro').reset();			
+			document.getElementById('frmRegistro').reset();			
 			break;
 		}
 	}
@@ -93,20 +93,20 @@ function alterar(p){
 
 //função do botao Alterar
 function prepararAlterar(idRow){	
-	document.getElementById('btnCadastrarSalvar').value = "Salvar";
+	document.getElementById('btnGuardarRegistro').value = "Guardar";
 	
-	var txtNome = document.getElementById('txtNome'),
-	    dtpDataNascimento = document.getElementById('dtpDataNascimento'),
+	var txtNombre = document.getElementById('txtNombre'),
+	    dtpFechaNacimiento = document.getElementById('dtpFechaNacimiento'),
 	    rdoMasculino = document.getElementById('rdoMasculino'),
-	    rdoFeminino = document.getElementById('rdoFeminino');
+	    rdoFemenino = document.getElementById('rdoFemenino');
 
 	var pessoas = JSON.parse(localStorage.getItem('value'));
 	for(var i = 0; i < pessoas.length; i++){
 		if(pessoas[i].Id == idRow){			
 			//popular os campos
-			txtNome.value = pessoas[i].Nome;
-			dtpDataNascimento.value = pessoas[i].DataNascimento.replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1'); //caso fosse tipo date toISOString().substring(0, 10);
-			rdoMasculino.checked = !(rdoFeminino.checked = (pessoas[i].Sexo == 'F'));
+			txtNombre.value = pessoas[i].Nombre;
+			dtpFechaNacimiento.value = pessoas[i].FechaNacimiento.replace(/(\d{2})\/(\d{2})\/(\d{4})/,'$3-$2-$1'); //caso fosse tipo date toISOString().substring(0, 10);
+			rdoMasculino.checked = !(rdoFemenino.checked = (pessoas[i].Sexo == 'F'));
 			
 			//recarrega a lista para limpar o th com background alterado
 			listar();
@@ -115,7 +115,7 @@ function prepararAlterar(idRow){
 			if(idAlterar === null){
 				//mudar o background da nova linha
 				var th = document.getElementById("rowTable"+i);				
-				th.className = "estadoAlteracao";				
+				th.className = "estadoAlterado";				
 			}
 
 			//atribuir o Id a variavel global
@@ -156,16 +156,16 @@ function listar(){
 	for(var i = 0; i < pessoas.length; i++){
 		var	id = pessoas[i].Id,
 		    nombre = pessoas[i].Nombre,
-		    nascimiento = pessoas[i].DataNascimento,
+		    nascimiento = pessoas[i].FechaNacimiento,
 		    sexo = pessoas[i].Sexo,
-			data = pessoas[i].DataCadastro
+			dato = pessoas[i].DatoRegistro
 			       
 		tbody.innerHTML += '<tr id="rowTable'+i+'">'+
 								'<td>'+id+'</td>'+
 								'<td>'+nombre+'</td>'+
 								'<td>'+nascimiento+'</td>'+
 								'<td>'+sexo+'</td>'+
-								'<td>'+data+'</td>'+
+								'<td>'+dato+'</td>'+
 								'<td><button onclick="excluir(\'' + id + '\')">Excluir</button></td>'+
 								'<td><button onclick="prepararAlterar(\'' + id + '\')">Alterar</button></td>'+
 						   '</tr>';		
