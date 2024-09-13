@@ -155,15 +155,15 @@ function listar(){
 	
 	for(var i = 0; i < pessoas.length; i++){
 		var	id = pessoas[i].Id,
-		    nome = pessoas[i].Nome,
-		    nasc = pessoas[i].DataNascimento,
+		    nombre = pessoas[i].Nombre,
+		    nascimiento = pessoas[i].DataNascimento,
 		    sexo = pessoas[i].Sexo,
 			data = pessoas[i].DataCadastro
 			       
 		tbody.innerHTML += '<tr id="rowTable'+i+'">'+
 								'<td>'+id+'</td>'+
-								'<td>'+nome+'</td>'+
-								'<td>'+nasc+'</td>'+
+								'<td>'+nombre+'</td>'+
+								'<td>'+nascimiento+'</td>'+
 								'<td>'+sexo+'</td>'+
 								'<td>'+data+'</td>'+
 								'<td><button onclick="excluir(\'' + id + '\')">Excluir</button></td>'+

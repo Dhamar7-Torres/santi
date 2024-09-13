@@ -10,25 +10,25 @@
 
 <body>
 	<div class="all">
-		<h1 class="title">CRUD CON HTML, CSS, JS, JSON</h1>
+		<h1 class="title">CRUD CON HTML, CSS, JS, JSON, Santiago Morales Lopez 212H17016</h1>
 		<div class="center-fixed">	
 			<form id="frmCadastro">
-				<label for="txtNome">Nombre</label><br>
-				<input type="text" id="txtNome" placeholder="Nome"><br>
+				<label for="txtNombre">Nombre</label><br>
+				<input type="text" id="txtNombre" placeholder="Nombre"><br>
 				
-				<label for="dtpDataNascimento">Fecha de Nacimiento</label><br>
-				<input type="date" id="dtpDataNascimento" value="1990-08-29" required>
+				<label for="dtpFechaNacimiento">Fecha de Nacimiento</label><br>
+				<input type="date" id="dtpFechaNacimiento" value="1990-08-29" required>
 				
 				<fieldset>
 					<legend>Sexo</legend>
-					<input type="radio" name="genero" value="male" id="rdoMasculino" checked>
+					<input type="radio" name="genero" value="hombre" id="rdoMasculino" checked>
 					<label for="rdoMasculino">Masculino</label><br>		
 					
-					<input type="radio" name="genero" value="female" id="rdoFeminino">
-					<label for="rdoFeminino">Feminino</label>
+					<input type="radio" name="genero" value="mujer" id="rdoFemenino">
+					<label for="rdoFemenino">Femenino</label>
 				</fieldset>
 				
-				<input type="submit" name="" id="btnCadastrarSalvar" value="Cadastrar">
+				<input type="submit" name="" id="btnGuardarRegistro" value="btnGuardarRegistro">
 			</form>
 		</div>
 		<table>
@@ -39,7 +39,7 @@
 					<th>Nombre</th>
 					<th>Nacimiento</th>
 					<th>Sexo</th>
-					<th>Ultima Actualizacion</th>
+					<th>Ultima_Actualizacion</th>
 				</tr>
 			</thead>
 			<tbody id="tbodyResultados"></tbody>
